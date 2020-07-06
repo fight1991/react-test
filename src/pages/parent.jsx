@@ -1,8 +1,14 @@
 import React from 'react'
+import Child from './child'
 export default class Parent extends React.Component {
   render () {
     return (
-      <div>我是父页面</div>
+      <div>
+        <Child onEvent={this.childFrom}></Child>
+      </div>
     )
+  }
+  childFrom = (e) => {
+    console.log(e)
   }
 }
