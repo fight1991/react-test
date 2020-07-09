@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import { createStore } from 'redux'
-import rootReducers from './reducers/index'
-import { Provider } from 'react-redux'
-const store = createStore(rootReducers)
-store.subscribe(() => {
-  console.log(store)
-})
+
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider } from 'react-redux';
+import Reducers from '@/reducers';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+
+const store = createStore(Reducers, composeWithDevTools(applyMiddleware(logger, thunk)))
+
 ReactDOM.render(
   <Provider store={store}>
     <App/>
